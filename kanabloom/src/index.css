@@ -1,0 +1,52 @@
+@import "tailwindcss";
+
+@theme {
+  --color-sakura: #F2A7B8;
+  --color-sakura-deep: #E27D96;
+  --color-blush: #FBE4EA;
+  --color-blush-soft: #FDF1F4;
+  --color-ivory: #FBF7F0;
+  --color-beni: #B83A4B;          /* muted Japanese red */
+  --color-beni-dark: #962C3B;
+  --color-charcoal: #2B2A2E;
+  --color-ink: #45434A;
+  --color-mist: #8C8891;
+  --color-matcha: #7E9F7A;
+
+  --font-display: "Fraunces", Georgia, serif;
+  --font-sans: "Zen Maru Gothic", system-ui, sans-serif;
+  --font-kana: "Klee One", "Zen Maru Gothic", serif;
+
+  --radius-card: 1.5rem;
+  --shadow-soft: 0 10px 30px -12px rgb(184 58 75 / 0.18), 0 2px 6px -2px rgb(43 42 46 / 0.06);
+  --shadow-lift: 0 22px 44px -18px rgb(184 58 75 / 0.32);
+
+  --animate-fall: fall linear infinite;
+  --animate-sway: sway ease-in-out infinite alternate;
+  --animate-rise: rise 0.6s cubic-bezier(.2,.8,.2,1) both;
+}
+
+@keyframes fall { from { transform: translateY(-10vh) rotate(0deg); } to { transform: translateY(110vh) rotate(540deg); } }
+@keyframes sway { from { margin-left: -24px; } to { margin-left: 24px; } }
+@keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+
+@layer base {
+  html { -webkit-tap-highlight-color: transparent; }
+  body { @apply bg-ivory text-charcoal font-sans antialiased; }
+  h1, h2, h3 { @apply font-display tracking-tight; }
+  :focus-visible { @apply outline-2 outline-offset-2 outline-beni; }
+}
+
+@utility card { border-radius: var(--radius-card); background: #fff; box-shadow: var(--shadow-soft), 0 0 0 1px var(--color-blush); }
+@utility btn { @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 font-medium transition duration-200 disabled:cursor-not-allowed disabled:opacity-50; }
+@utility btn-primary { @apply btn bg-beni text-white hover:bg-beni-dark hover:shadow-[var(--shadow-lift)] active:scale-[.98]; }
+@utility btn-soft { @apply btn bg-blush text-beni hover:bg-sakura/50; }
+@utility btn-ghost { @apply btn text-ink hover:bg-blush-soft; }
+@utility input { @apply w-full rounded-2xl border border-blush bg-white px-4 py-3 text-charcoal placeholder:text-mist focus:border-sakura-deep focus:ring-4 focus:ring-blush focus:outline-none; }
+@utility label { @apply mb-1.5 block text-sm font-medium text-ink; }
+@utility chip { @apply inline-flex items-center rounded-full bg-blush px-3 py-1 text-xs font-medium text-beni; }
+@utility kana { font-family: var(--font-kana); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+}
